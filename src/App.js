@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import ColorPicker from './components/ColorPicker';
+import SizeSetting from './components/SizeSetting';
+import Reset from './components/Reset';
+import Result from './components/Result';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        color: 'red',
+        fontSize: 12
+    };
+    this.onSetColor = this.onSetColor.bind(this);
+    this.onChangeSize = this.onChangeSize.bind(this);
+    this.onSettingDefault = this.onSettingDefault.bind(this);
+  }
+
+  onSetColor(params) {
+    this.setState({
+        color: params
+    });
+  }
+
+  onChangeSize(value) {
+    // 8 <= size >= 36
+    if(this.state.fontSize + value >= 8 && this.state.fontSize + value <= 36) {
+      this.setState ({
+        fontSize: this.state.fontSize + value 
+      });
+    }
+  }
+
+  onSettingDefault(value) { //nhận 1 cái value là do thằng con trả ra
+    if(value) {
+        this.setState({
+            color: 'red',
+            fontSize: 12
+        });
+    }
+  }
+
+  render() {
+     return (
+        
+        <div className="container mt-50">
+            <div className="row">
+                <ColorPicker color={this.state.color} onReceiveColor={this.onSetColor} />
+
+                <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <SizeSetting fontSize={this.state.fontSize} onChangeSize={this.onChangeSize} /> 
+                    <Reset onSettingDefault={this.onSettingDefault} />
+                </div>
+
+                <Result color={this.state.color} fontSize={this.state.fontSize} />
+            </div>
+        </div>
+
+     );
+  }
+
 }
 
 export default App;
