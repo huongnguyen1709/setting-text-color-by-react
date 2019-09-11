@@ -2,4 +2,4 @@
 
 ## By React
 
-Demo [Demo](https://setting-text-color.herokuapp.com/).
+[Demo](https://setting-text-color.herokuapp.com/).
