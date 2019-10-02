@@ -46,6 +46,7 @@ class App extends Component {
      return (
         
         <div className="container mt-50">
+            <h1 class="header">Setting Text Color</h1>
             <div className="row">
                 <ColorPicker color={this.state.color} onReceiveColor={this.onSetColor} />
 
